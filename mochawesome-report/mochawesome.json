@@ -1,0 +1,138 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-12-09T14:39:04.246Z",
+    "end": "2020-12-09T14:40:09.639Z",
+    "duration": 65393,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7fa35c93-d23f-4fc6-a151-72b404420ef6",
+      "title": "",
+      "fullFile": "cypress\\integration\\examples\\ValidatingDisplayedProducts.js",
+      "file": "cypress\\integration\\examples\\ValidatingDisplayedProducts.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b629f1cb-a5f8-4e30-b8da-8374633daf77",
+          "title": "Shipping 2 products",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Check the total amount of 2 displayed products",
+              "fullTitle": "Shipping 2 products Check the total amount of 2 displayed products",
+              "timedOut": null,
+              "duration": 22882,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://automationpractice.com/index.php?');\ncy.get('#search_query_top').type(this.data.productName2);\ncy.wait(3000);\ncy.get('div.ac_results').click();\ncy.contains('Add to cart').click();\ncy.contains('Continue shopping').click();\ncy.get('#search_query_top').type(this.data.productName3);\ncy.wait(3000);\ncy.get('div.ac_results').click();\ncy.contains('Add to cart').click();\ncy.contains('Proceed to checkout').click();\ncy.get('[title=\"View my shopping cart\"]').find('span.ajax_cart_quantity').should('have.text', '2');\nvar sum = 0;\ncy.get('tr td:nth-child(6)').each(function ($el, index, $list) {\n  var val = $el.text().replace(\"$\", \" \").trim();\n  sum = Number(sum) + parseInt(val);\n});\nvar totalshipping = 0;\ncy.get('#total_shipping').then(function (element) {\n  var shipping = element.text().replace(\"$\", \" \").trim();\n  totalshipping = Number(totalshipping) + parseInt(shipping);\n});\ncy.get('#total_price').then(function (element1) {\n  var x = element1.text().replace(\"$\", \" \");\n  var total = parseInt(x);\n  expect(total).to.be.equal(sum + totalshipping);\n});",
+              "err": {},
+              "uuid": "6acd0d11-86cd-4432-ace6-e98ee84594ae",
+              "parentUUID": "b629f1cb-a5f8-4e30-b8da-8374633daf77",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Check the total amount after delete 1 of the displayed products",
+              "fullTitle": "Shipping 2 products Check the total amount after delete 1 of the displayed products",
+              "timedOut": null,
+              "duration": 21479,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://automationpractice.com/index.php?');\ncy.get('#search_query_top').type(this.data.productName2);\ncy.wait(3000);\ncy.get('div.ac_results').click();\ncy.contains('Add to cart').click();\ncy.contains('Continue shopping').click();\ncy.get('#search_query_top').type(this.data.productName3);\ncy.wait(3000);\ncy.get('div.ac_results').click();\ncy.contains('Add to cart').click();\ncy.contains('Proceed to checkout').click();\ncy.get('[title=\"View my shopping cart\"]').find('span.ajax_cart_quantity').should('have.text', '2'); // cy.pause()\ncy.get('tr td:nth-child(2)').each(function ($el, index, $list) {\n  var x = $el.text();\n  cy.log(x);\n  if (x.includes(\"Blouse\")) {\n    cy.get('tr td:nth-child(2)').eq(index).next().next().next().next().next().find('a.cart_quantity_delete').click();\n    cy.wait(3000);\n  }\n});\nvar sum = 0;\ncy.get('tr td:nth-child(6)').then(function (element) {\n  var x = element.text().replace(\"$\", \" \").trim();\n  sum = Number(sum) + parseInt(x);\n});\nvar totalshipping = 0;\ncy.get('#total_shipping').then(function (element1) {\n  var shipping = element1.text().replace(\"$\", \" \").trim();\n  totalshipping = Number(totalshipping) + parseInt(shipping);\n});\ncy.get('#total_price').then(function (element2) {\n  var y = element2.text().replace(\"$\", \" \").trim();\n  var total = parseInt(y);\n  cy.wait(3000);\n  expect(total).to.be.equal(sum + totalshipping);\n});\ncy.get('[title=\"View my shopping cart\"] > .ajax_cart_quantity').should('have.text', '1');",
+              "err": {},
+              "uuid": "260a1b67-27ff-4cf7-9737-f0a1651548a1",
+              "parentUUID": "b629f1cb-a5f8-4e30-b8da-8374633daf77",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Check the total amount of 2 displayed products through my shopping Cart ",
+              "fullTitle": "Shipping 2 products Check the total amount of 2 displayed products through my shopping Cart ",
+              "timedOut": null,
+              "duration": 17314,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('http://automationpractice.com/index.php?');\ncy.get('#search_query_top').type(this.data.productName4);\ncy.wait(3000);\ncy.contains('Printed Chiffon Dress').click();\ncy.contains('Add to cart').click();\ncy.contains('Continue shopping').click();\ncy.get('#search_query_top').type(this.data.productName4);\ncy.wait(3000);\ncy.contains('Printed Dress').click({\n  force: true\n}); // cy.get('.ac_results > ul > :nth-child(3)').click()\ncy.contains('Add to cart').click();\ncy.contains('Continue shopping').click();\ncy.get('[title=\"View my shopping cart\"] > .ajax_cart_quantity').should('have.text', 2);\ncy.get('div.shopping_cart').invoke('show');\nvar sum = 0;\ncy.get('div.cart_block_list').find('span.price').each(function ($el, index, $list) {\n  if (index < 3) {\n    var text = $el.text().trim().substring(1);\n    sum = Number(sum) + parseFloat(text);\n    cy.log(sum);\n  }\n});\nvar total = 0;\ncy.get('div.cart-prices-line.last-line').find('span.price.cart_block_total.ajax_block_cart_total').then(function (element4) {\n  var text4 = element4.text().trim().substring(1);\n  var total = parseFloat(text4);\n  cy.log(total);\n  expect(total).to.be.equal(sum);\n});\ncy.get('#button_order_cart').click({\n  force: true\n});",
+              "err": {},
+              "uuid": "4be0f355-15aa-4a92-9fee-9902e3e82cf4",
+              "parentUUID": "b629f1cb-a5f8-4e30-b8da-8374633daf77",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6acd0d11-86cd-4432-ace6-e98ee84594ae",
+            "260a1b67-27ff-4cf7-9737-f0a1651548a1",
+            "4be0f355-15aa-4a92-9fee-9902e3e82cf4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 61675,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "5.1.0"
+    }
+  }
+}

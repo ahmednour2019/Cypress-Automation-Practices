@@ -1,0 +1,13 @@
+{
+  "chromeWebSecurity": false,
+  "pageLoadTimeout": 170000,
+  "defaultCommandTimeout": 10000,
+  "reporter": "mochawesome",
+  "env": {
+    "url": "http://automationpractice.com/index.php?"
+  },
+  "retries": {
+    "runMode": 1
+  },
+  "projectId": "iiqkjd"
+}
