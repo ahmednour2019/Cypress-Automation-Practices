@@ -2,8 +2,12 @@
   "name": "bob",
   "gender": "Female",
   "productName":["Nokia Edge","Blackberry"],
-  "productName2":"blouse",
+  "productName2":"Blouse",
   "productName3":"shirt",
   "productName4":"dresses",
-  "productName5":"Printed Dress"
+  "productName5":"Printed Summer Dress",
+  "existingOrder":"YEVTHYGST",
+  "commentMSG":"hi this order is not sufficient to me",
+  "wishList":"hi all this is my wishlist"
+  
 }

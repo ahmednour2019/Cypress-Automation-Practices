@@ -1,5 +1,9 @@
 /// <reference types="Cypress" />
 
+
+
+
+
 //const { invert } = require("cypress/types/lodash")
 
 describe('Shipping 2 products',function()
@@ -45,7 +49,7 @@ describe('Shipping 2 products',function()
          expect(total).to.be.equal(sum+totalshipping)
      })
 }) 
-it('Check the total amount after delete 1 of the displayed products',function()
+it.only('Check the total amount after delete 1 of the displayed products',function()
 {
     cy.visit('http://automationpractice.com/index.php?')
     cy.get('#search_query_top').type(this.data.productName2)
@@ -134,4 +138,62 @@ it('Check the total amount of 2 displayed products through my shopping Cart ',fu
     })
     cy.get('#button_order_cart').click({force: true})
 })
+
+
+/* here we set the css property of this specific block "cart" to be display: inline instead of display: none , so we can procees working on it properly */
+it('Check the total amount of 2 displayed products through my shopping Cart after deleting 1 of the displayed products ',function()
+{
+
+    cy.visit('http://automationpractice.com/index.php?')
+    cy.get('#search_query_top').type(this.data.productName4)
+    cy.wait(3000)
+    cy.contains('Printed Chiffon Dress').click()
+    cy.contains('Add to cart').click()
+    cy.contains('Continue shopping').click()
+    cy.get('#search_query_top').type(this.data.productName2)
+    cy.wait(3000)
+    cy.get('div.ac_results').click()
+    cy.contains('Add to cart').click()
+    cy.contains('Continue shopping').click()
+    cy.get('[title="View my shopping cart"] > .ajax_cart_quantity').should('have.text',2)
+    // to apply mousehover we should use jquery method 'invoke('show')'
+    cy.get('[title="View my shopping cart"]').invoke('show').click()
+    //to change CSS attribute we should use jquery method 'invoke('attr','style','.....')'
+    cy.get('div.cart_block.block.exclusive')
+        .invoke('attr', 'style', 'display: inline;')
+        .should('have.attr', 'style', 'display: inline;')
+        cy.get('dl.products').find('a.cart_block_product_name').each(($el, index, $list) => {
+         if($el.text().includes(this.data.productName2))
+         {
+             cy.get('a.ajax_cart_block_remove_link').eq(index).click()
+         }
+        })       
+    var sum=0
+    var x=0
+    var y=0
+    var total=0
+    cy.wait(5000)
+    cy.get('div.cart_block_list').find('div.cart-info span.price').then(function(element5){
+         x=element5.text().trim().substring(1)
+         x=parseFloat(x)
+    })
+    //cy.wait(5000)
+    cy.get('span.price.cart_block_shipping_cost.ajax_cart_shipping_cost').then(function(element6){
+         y= element6.text().trim().substring(1)
+         y=parseFloat(y)
+    })
+    cy.get('span.price.cart_block_total.ajax_block_cart_total').then(function(element7) {
+        sum= element7.text().trim().substring(1)
+        sum = parseFloat(sum)
+        total= x+y
+        total= parseFloat(total)
+        expect(total).to.be.equal(sum)
+    })
+    cy.contains('Check out').click()
+    cy.contains('Proceed to checkout').then(function(element8){
+        expect(element8).to.be.exist
+    })
+    
+    })
+
 })

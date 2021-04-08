@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cypress": "^6.1.0"
+    "cypress": "^6.1.0",
+    "faker": "^5.4.0"
   },
   "devDependencies": {
     "mocha": "^8.2.1",
     "mochawesome": "^6.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules\\.bin\\cypress run",
+    "headTest": "npm run test -- --headed",
+    "chromeTest": "npm run test -- --browser chrome",
+    "createNewOrderTest": "npm run test -- --spec \"cypress/integration/examples/CreateNewOrder.js\"",
+    "dashBoardTest": "npm run test -- --spec \"cypress/integration/examples/CreateNewOrder.js\" --record --key 5c1db4fe-f29c-43b6-964b-01ea2c498f8c --reporter mochawesome"
   },
   "repository": {
     "type": "git",
